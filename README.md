@@ -8,6 +8,7 @@
 
 调用seqeval库测出来的结果为：
 Val F1: 0.6448,            Precision: 0.6103, Recall: 0.6835
+
 自己手写评测结果为：
 Val F1: 0.6706,            Precision: 0.6490, Recall: 0.6938
 
