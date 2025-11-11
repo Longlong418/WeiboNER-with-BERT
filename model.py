@@ -52,28 +52,5 @@ class BertNER(nn.Module):
         logits = self.fc(x)   #得到(batch_size,sel_length,num_classes)
 
         return logits
-#测试代码
-# base_dir = os.path.dirname(__file__)  # 获取当前脚本所在路径
-# file_path = os.path.join(base_dir, "data", "train.txt")
-# train_examples,set_label= data_read(file_path)
-# train_dataset=MyDataset(train_examples)
-# train_dataloader=DataLoader(train_dataset,batch_size=3,shuffle=True,collate_fn=collate_fn)
-# tokenizer=AutoTokenizer.from_pretrained('bert-base-chinese')
-# model=BertCnnNER(num_classes=len(idx_2_labels))
-# for batch_text, batch_label in train_dataloader:
-#     # print(tokenizer.decode(batch_text[1], skip_special_tokens=False))
-#     # print(batch_text[1])
-#     # print(batch_label[1])
-#     print(batch_text.shape)
-#     print(batch_label.shape)
-#     logits=model(input_ids=batch_text)  
-#     print("logits shape:",logits.shape)
-#     print("logits:",logits)
-    
-
-
-
-# token_type_ids=torch.tensor([test_data['token_type_ids']])
-# attention_mask=torch.tensor([test_data['attention_mask']])
 
 

@@ -1,0 +1,7 @@
+numpy==2.3.4
+pandas==2.3.3
+seqeval==1.2.2
+swanlab==0.7.1
+torch==1.13.1+cu116
+tqdm==4.67.1
+transformers==4.36.2
