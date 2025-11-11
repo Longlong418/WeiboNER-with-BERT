@@ -13,12 +13,19 @@ Val F1: 0.6706,            Precision: 0.6490, Recall: 0.6938
 
 ## 数据集来源：
 weibo命名实体识别数据集
+
 简介：本数据集包括训练集（1350）、验证集（269）、测试集（270），实体类型包括地缘政治实体(GPE.NAM)、地名(LOC.NAM)、机构名(ORG.NAM)、人名(PER.NAM)及其对应的代指(以NOM为结尾)。
+
 语种：Chinese
+
 "训练集/验证集/测试集"数量: 1350/269/270
+
 实体类别数量：4
+
 论文：https://aclanthology.org/D15-1064.pdf
+
 下载地址：https://tianchi.aliyun.com/dataset/144312
+
 Github: https://github.com/hltcoe/golden-horse
 
 ## 📂 项目结构示例
