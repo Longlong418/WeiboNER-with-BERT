@@ -1,0 +1,7 @@
+__pycache__/
+data/
+result/
+swanlog/
+test.py
+ner.py
+
