@@ -1,7 +1,13 @@
 __pycache__/
+.vscode/
 data/
-result/
 swanlog/
 test.py
 ner.py
+model/
+result/bert-base-chineseformsra_NER.pth
+result/bert-base-chineseforWeibo_NER.pth
+result/chinese-bert-wwmformsra_NER.pth
+result/chinese-bert-wwmforWeibo_NER.pth
+
 

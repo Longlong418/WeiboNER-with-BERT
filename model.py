@@ -5,10 +5,11 @@ import os
 from torch.utils.data import Dataset, DataLoader
 from data_process import  MyDataset
 from transformers import BertModel, AutoTokenizer
+
 class BertCnnNER(nn.Module):
-    def __init__(self,num_classes,dropout=0.1):
+    def __init__(self,num_classes,config,model_name):
         super(BertCnnNER, self).__init__()
-        self.bert = BertModel.from_pretrained('C:\\Users\jd\\.cache\\huggingface\\hub\\models--bert-base-chinese\\snapshots\\8f23c25b06e129b6c986331a13d8d025a92cf0ea')
+        self.bert = BertModel.from_pretrained(config.models[model_name])
         hidden_size = self.bert.config.hidden_size  # BERT的隐藏层大小，通常为768
         # 因为1D卷积的输出长度计算公式为：(L_in + 2*padding - dilation*(kernel_size-1) -1)/stride +1# 这里stride=1,dilation=1
         # =>(L_in + 2*padding - (kernel_size-1) -1) +1 = L_in + 2*padding - kernel_size +1
@@ -16,7 +17,7 @@ class BertCnnNER(nn.Module):
         self.conv1 = nn.Conv1d(in_channels=hidden_size, out_channels=100, kernel_size=3,padding=1)
         self.conv2 = nn.Conv1d(in_channels=hidden_size, out_channels=100, kernel_size=5,padding=2)
         self.conv3 = nn.Conv1d(in_channels=hidden_size, out_channels=100, kernel_size=7,padding=3)
-        self.dropout = nn.Dropout(dropout)
+        self.dropout = nn.Dropout(config.dropout)
         self.fc = nn.Linear(3*100, num_classes)#  3个卷积层的输出通道数之和
     def forward(self, input_ids):
         outputs=self.bert(input_ids=input_ids,
@@ -37,11 +38,11 @@ class BertCnnNER(nn.Module):
         return logits
     
 class BertNER(nn.Module):
-    def __init__(self,num_classes,dropout=0.1):
+    def __init__(self,num_classes,config,model_name):
         super(BertNER, self).__init__()
-        self.bert = BertModel.from_pretrained('C:\\Users\jd\\.cache\\huggingface\\hub\\models--bert-base-chinese\\snapshots\\8f23c25b06e129b6c986331a13d8d025a92cf0ea')
+        self.bert = BertModel.from_pretrained(config.models[model_name])
         hidden_size = self.bert.config.hidden_size  # BERT的隐藏层大小，通常为768
-        self.dropout = nn.Dropout(dropout)
+        self.dropout = nn.Dropout(config.dropout)
         self.fc = nn.Linear(hidden_size, num_classes)#  3个卷积层的输出通道数之和
     def forward(self, input_ids):
         outputs=self.bert(input_ids=input_ids,
@@ -50,7 +51,6 @@ class BertNER(nn.Module):
         x=outputs.last_hidden_state #(batch_size, seq_length, hidden_size)
         x = self.dropout(x)                 
         logits = self.fc(x)   #得到(batch_size,sel_length,num_classes)
-
         return logits
 
 

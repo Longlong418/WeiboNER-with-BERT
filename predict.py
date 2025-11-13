@@ -12,104 +12,45 @@ import pandas as pd
 import numpy as np
 import os
 from tqdm import tqdm
-"""
-y_true, y_pred的格式为：
-[['O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'B-PER.NAM', 'I-PER.NAM', 'I-PER.NAM', 'O', 'O'], 
-['O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'B-PER.NAM', ...], 
-['O', 'O', 'O', 'O', 'B-ORG.NAM', 'I-ORG.NAM', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', ...], 
-...
-...
-...,
-['O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', ...]
-]
-#所有的类型标签为：
-['B-GPE.NAM', 'B-GPE.NOM', 'B-LOC.NAM', 'B-LOC.NOM', 'B-ORG.NAM', 'B-ORG.NOM', 'B-PER.NAM', 'B-PER.NOM', 
-'I-GPE.NAM', 'I-GPE.NOM', 'I-LOC.NAM', 'I-LOC.NOM', 'I-ORG.NAM', 'I-ORG.NOM', 'I-PER.NAM', 'I-PER.NOM', 'O']
+from tools import extract_entities,my_Precision,my_Recall,my_f1_score
+from Config import Config
+from datetime import datetime
+import argparse
+# 创建解析器
+parser = argparse.ArgumentParser(description="Predict NER")
 
-"""
-#获取实体
-def extract_entities(labels)->list: #return [(seq_idx,entity_type,start_idx,end_idx),...]
-    all_entities = []
-    for i in range(len(labels)):
-        start_idx=None
-        end_idx=None
-        entity_type=None
-        n=len(labels[i])
-        j=0
-        while j<n:
-            if labels[i][j]=='O':
-                j+=1
-                continue
-            if labels[i][j][0]=='B':
-                start_idx=j
-                entity_type=labels[i][j][2:]
-                k=j+1
-                while k<n and labels[i][k][0]=='I' and labels[i][k][2:]==entity_type:
-                    k+=1
-                end_idx=k-1
-                all_entities.append((i,entity_type,start_idx,end_idx))
-                j=k
-                continue
-            #凭空的I 不算入实体
-            if labels[i][j][0]=='I':
-                j+=1
-                continue
-    return all_entities                                                
-# test=[['O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'B-PER.NAM', 'I-PER.NAM', 'I-PER.NAM', 'O', 'O'], 
-# ['O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'B-PER.NAM', 'I-PER.NAM', 'I-PER.NAM', 'O', 'O'], 
-# ['O', 'O', 'O', 'O', 'B-ORG.NAM', 'I-ORG.NAM', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', ]]
+parser.add_argument("--model_name", type=str, default=None, help="模型名称")
+parser.add_argument("--data_name", type=str, default=None, help="数据集名称")
+parser.add_argument("--batch_size", type=int, default=None, help="训练批量大小")
 
-# print(extract_entities(test))
-def my_Precision(y_true, y_pred):
-    #预测为正的样本中，有多少是真正的正样本
-    #转成集合才能进行交集操作
-    true_entities=set(extract_entities(y_true))
-    pred_entities=set(extract_entities(y_pred))
-    tp=true_entities&pred_entities  #实际上预测对的样本
-    return len(tp)/(len(pred_entities)+1e-8)
+args = parser.parse_args()
 
-    
-def my_Recall(y_true, y_pred):
-    #实际为正的样本中，有多少被预测为正样本
-    true_entities=set(extract_entities(y_true))
-    pred_entities=set(extract_entities(y_pred))
-    tp=true_entities&pred_entities  #实际上预测对的样本
-    return len(tp)/(len(true_entities)+1e-8)
-def my_f1_score(y_true, y_pred):
-    #调和平均的意义：当其中一个指标特别低时，整体得分应被显著拉低
-    precision=my_Precision(y_true, y_pred)
-    recall=my_Recall(y_true, y_pred)
-    return 2*precision*recall/(precision+recall+1e-8)
+config=Config()
+model_name = args.model_name if args.model_name else "chinese-bert-wwm"
+data_name = args.data_name if args.data_name else "msra_NER"
+batch_size = args.batch_size if args.batch_size else config.batch_size
 
-
-     
-
-
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-batch_size = 8
-max_length = 128
-num_epochs = 10
-
-base_dir = os.path.dirname(__file__)  # 获取当前脚本所在路径
-model_path=os.path.join(base_dir, "result", "BertCnnNER_model.pth")
-testdata_path= os.path.join(base_dir, "data", "test.txt")
-
+device = config.device
+model_path=config.models[model_name]
+trained_save_root_path=config.trained_save_root_path
+data_name="msra_NER"
+train_file_path=config.data[data_name][0]
+testdata_path= config.data[data_name][2]
+model_save_path = os.path.join(trained_save_root_path, f"{model_name}for{data_name}.pth")
 val_df,_= MyDataset.data_read(testdata_path)
 
-val_dataset = MyDataset(data=val_df)
+val_dataset = MyDataset(data=val_df,model_path=model_path,file_path=train_file_path)
 
-val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False,collate_fn=MyDataset.collate_fn)
+val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False,collate_fn=val_dataset.collate_fn_2)
 
 num_classes = len(MyDataset.idx_2_labels)
 
-model = BertCnnNER(num_classes=num_classes).to(device)
+model = BertCnnNER(num_classes=num_classes,config=config,model_name=model_name).to(device)
 
-model.load_state_dict(torch.load(model_path))
+model.load_state_dict(torch.load(model_save_path))
 
 if __name__=="__main__":
     model.to(device)
-
-
     model.eval()
     all_preds = []
     all_labels = []
@@ -136,16 +77,17 @@ if __name__=="__main__":
         val_precision = my_Precision(all_labels, all_preds)
         val_recall = my_Recall(all_labels, all_preds)
         val_f1 =my_Recall(all_labels, all_preds)
-        # val_report = classification_report(all_labels, all_preds)
+
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         print(f'Val F1: {val_f1 :.4f},\
             Precision: {val_precision:.4f}, Recall: {val_recall:.4f}')
-        # print(val_report)
-
-        result_path = os.path.join(base_dir, "result", "training_log.txt")
+        
+        result_path = os.path.join(trained_save_root_path, "training_log.txt")
+        
         with open(result_path, 'a', encoding='utf-8') as f:
-            f.write(f'Val F1: {val_f1 :.4f},\
-            Precision: {val_precision:.4f}, Recall: {val_recall:.4f}\n')
-            # f.write(val_report + '\n')
+            f.write(f"模型：{model_name} 数据集: {data_name}\n")
+            f.write(f"[{timestamp}]\nVal F1: {val_f1:.4f}, Precision: {val_precision:.4f}, Recall: {val_recall:.4f}\n\n")
+           
 
 
     
