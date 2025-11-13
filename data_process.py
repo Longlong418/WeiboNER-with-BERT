@@ -5,11 +5,7 @@ from torch.utils.data import Dataset, DataLoader
 from transformers import AutoTokenizer
 
 
-"""
-idx_2_labels为：
-['B-GPE.NAM', 'B-GPE.NOM', 'B-LOC.NAM', 'B-LOC.NOM', 'B-ORG.NAM', 'B-ORG.NOM', 'B-PER.NAM', 'B-PER.NOM', 
-'I-GPE.NAM', 'I-GPE.NOM', 'I-LOC.NAM', 'I-LOC.NOM', 'I-ORG.NAM', 'I-ORG.NOM', 'I-PER.NAM', 'I-PER.NOM', 'O']
-"""
+
 class MyDataset(Dataset):
     train_examples, set_label = None, None  
     idx_2_labels = None     # list sorted labels
@@ -206,31 +202,3 @@ class MyDataset(Dataset):
         batch_label = torch.tensor(finally_labels, dtype=torch.long)
 
         return batch_text, batch_label
-
-
-
-
-
-# base_dir = os.path.dirname(__file__)  # 获取当前脚本所在路径
-# train_file_path = os.path.join(base_dir, "data", "msra_NER","train.txt")
-# val_file_path= os.path.join(base_dir, "data", "msra_NER","test.txt")
-# train_df,set_label= MyDataset.data_read(train_file_path)
-# val_df,_= MyDataset.data_read(val_file_path)
-
-
-
-# train_dataset = MyDataset(data=train_df,model_path="./model/models--hfl--chinese-bert-wwm/snapshots/ab0aa81da273504efc8540aa4d0bbaa3016a1bb5",file_path=train_file_path)
-# val_dataset = MyDataset(data=val_df,model_path="./model/models--hfl--chinese-bert-wwm/snapshots/ab0aa81da273504efc8540aa4d0bbaa3016a1bb5",file_path=train_file_path)
-
-# num_classes = len(MyDataset.idx_2_labels)
-
-# train_loader = DataLoader(train_dataset, batch_size=2, shuffle=True,collate_fn=train_dataset.collate_fn_2)
-# val_loader = DataLoader(val_dataset, batch_size=2, shuffle=False,collate_fn=train_dataset.collate_fn_2)
-
-# for batch_text,batch_label in train_loader:
-#     print(train_dataset.tokenizer.decode(batch_text[1], skip_special_tokens=False))
-#     print(batch_text[1])
-#     print(batch_label[1])
-#     print(batch_text.shape)
-#     print(batch_label.shape)
-
