@@ -1,0 +1,18 @@
+PER.NOM
+LOC.NAM
+PER.NAM
+GPE.NAM
+ORG.NAM
+ORG.NOM
+LOC.NOM
+GPE.NOM
+
+
+Label	Tag	Meaning
+PER	PER.NAM	名字（张三）
+PER.NOM	代称、类别名（穷人）
+LOC	LOC.NAM	特指名称（紫玉山庄）
+LOC.NOM	泛称（大峡谷、宾馆）
+GPE	GPE.NAM	行政区的名称（北京）
+ORG	ORG.NAM	特定机构名称（通惠医院）
+ORG.NOM	泛指名称、统称（文艺公司）
