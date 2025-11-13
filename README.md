@@ -36,7 +36,9 @@
 
 ```
 Weibo-NER/
-│
+├── model/ 
+│ ├── models--bert-base-chinese
+│ ├── models--hfl--chinese-bert-wwm
 ├── data/ 
 │ ├── msra_NER
 │   ├── train.txt #原始数据
@@ -67,4 +69,5 @@ Weibo-NER/
 │── downloadmodel.py
 │── tools.py
 └── README.md
+└── README_EN.md
 ```
