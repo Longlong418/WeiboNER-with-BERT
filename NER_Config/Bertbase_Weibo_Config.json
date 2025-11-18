@@ -5,7 +5,7 @@
     "dev_path": "./data/Weibo_NER/dev.txt",
     "test_path": "./data/Weibo_NER/test.txt",
     "model_name": "bert-base-chinese",
-    "model_path": "./model/models--bert-base-chinese/snapshots/8f23c25b06e129b6c986331a13d8d025a92cf0ea",
+    "model_path": "./model/bert-base-chinese",
     "device": "cuda",
     "batch_size": 8,
     "dropout": 0.1,

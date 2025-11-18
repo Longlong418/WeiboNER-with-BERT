@@ -29,8 +29,13 @@ Results on `dev.txt` can be found in `result/training_log.txt`.
 pip install -r requirements.txt
 
 ```
+### 2.Load the pre-trained model to local.
 
-### 2.Train the Model
+```bash
+python download_model.py
+```
+The pre-trained model will be saved to the `./model` directory.
+### 3.Train the Model
 - --mode: run mode, set to train for training
 
 - --config_path: path to the configuration file, optional (default: ./NER_Config/Bertbase_Weibo_Config.json)
@@ -42,7 +47,7 @@ python main.py --mode train --config_path ./NER_Config/Bertbase_Weibo_Config.jso
 ```
 After training, the model weights will be saved in the directory specified by trained_save_root_path in the config file, and the file path will also be recorded in the JSON.
 
-### 3. Evaluate on the Test Set
+### 4. Evaluate on the Test Set
 ```bash
 python main.py --mode eval --config_path ./NER_Config/Bertbase_Weibo_Config.json
 
@@ -50,7 +55,7 @@ python main.py --mode eval --config_path ./NER_Config/Bertbase_Weibo_Config.json
 
 The script will output F1, Precision, Recall, and record the results in training_log.txt.
 
-### 4.Predict Entities in a Single Sentence
+### 5.Predict Entities in a Single Sentence
 ```bash
 python main.py --mode predict --config_path ./NER_Config/Bertbase_Weibo_Config.json
 

@@ -25,9 +25,14 @@ dev.txt结果详见 `result/training_log.txt`。
 
 ```bash
 pip install -r requirements.txt
-
 ```
-### 2.训练模型
+### 2.加载预训练模型到本地
+```bash
+python download_model.py
+```
+预训练模型会保存到`./model`文件夹下
+
+### 3.训练模型
 --mode：运行模式，训练时设置为 train
 --config_path：配置文件路径，可选，默认路径为 ./NER_Config/Bertbase_Weibo_Config.json
 一个配置文件对应一个实验
@@ -36,7 +41,7 @@ python main.py --mode train --config_path ./NER_Config/Bertbase_Weibo_Config.jso
 ```
 训练完成后，模型权重会保存在配置文件中 trained_save_root_path 指定的目录下，对应文件路径会保存在json文件中
 
-### 3.在测试集上评估
+### 4.在测试集上评估
 ```bash
 
 python main.py --mode eval --config_path ./NER_Config/Bertbase_Weibo_Config.json 
@@ -44,7 +49,7 @@ python main.py --mode eval --config_path ./NER_Config/Bertbase_Weibo_Config.json
 ```
 脚本会输出 F1、Precision、Recall，并将结果记录到 training_log.txt
 
-### 4.对单条句子进行实体预测
+### 5.对单条句子进行实体预测
 ```bash
 python main.py --mode predict --config_path ./NER_Config/Bertbase_Weibo_Config.json
 ```

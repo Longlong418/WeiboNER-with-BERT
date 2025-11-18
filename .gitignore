@@ -8,5 +8,11 @@ result/bert-base-chineseformsra_NER.pth
 result/bert-base-chineseforWeibo_NER.pth
 result/chinese-bert-wwmformsra_NER.pth
 result/chinese-bert-wwmforWeibo_NER.pth
+result/bert-base-chinese_for_msra_NER.pth
+result/bert-base-chinese_for_Weibo_NER.pth
+result/chinese-bert-wwm_for_msra_NER.pth
+result/chinese-bert-wwm_for_Weibo_NER.pth
+
+
 
 
