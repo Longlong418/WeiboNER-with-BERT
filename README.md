@@ -45,7 +45,6 @@ python main.py --mode eval --config_path ./NER_Config/Bertbase_Weibo_Config.json
 脚本会输出 F1、Precision、Recall，并将结果记录到 training_log.txt
 
 ### 4.对单条句子进行实体预测
-
 ```bash
 python main.py --mode predict --config_path ./NER_Config/Bertbase_Weibo_Config.json
 ```
