@@ -64,3 +64,128 @@ Epoch 10/10, Loss: 0.0034, Val F1: 0.9570,            Precision: 0.9558, Recall:
 [2025-11-13 21:58:15]
 Val F1: 0.9359, Precision: 0.9379, Recall: 0.9359
 
+模型：bert-base-chinese 数据集: Weibo_NER
+[2025-11-18 16:26:01] 
+Epoch 1/10, Loss: 0.5064, Val F1: 0.0000,            Precision: 0.0000, Recall: 0.0000
+Epoch 2/10, Loss: 0.2100, Val F1: 0.6119,            Precision: 0.5931, Recall: 0.6319
+Epoch 3/10, Loss: 0.1116, Val F1: 0.6436,            Precision: 0.6558, Recall: 0.6319
+Epoch 4/10, Loss: 0.0752, Val F1: 0.6728,            Precision: 0.6745, Recall: 0.6710
+Epoch 5/10, Loss: 0.0556, Val F1: 0.6748,            Precision: 0.7014, Recall: 0.6501
+Epoch 6/10, Loss: 0.0401, Val F1: 0.6745,            Precision: 0.6781, Recall: 0.6710
+Epoch 7/10, Loss: 0.0346, Val F1: 0.6737,            Precision: 0.6763, Recall: 0.6710
+Epoch 8/10, Loss: 0.0279, Val F1: 0.6582,            Precision: 0.6388, Recall: 0.6789
+Epoch 9/10, Loss: 0.0244, Val F1: 0.6838,            Precision: 0.6734, Recall: 0.6945
+Epoch 10/10, Loss: 0.0199, Val F1: 0.6641,            Precision: 0.6649, Recall: 0.6632
+模型：bert-base-chinese 数据集: Weibo_NER
+[2025-11-18 16:29:51]
+Val F1: 0.6626, Precision: 0.6691, Recall: 0.6562
+
+模型：bert-base-chinese 数据集: Weibo_NER
+[2025-11-18 16:40:57] 
+Epoch 1/10, Loss: 0.2950, Val F1: 0.6502,            Precision: 0.6154, Recall: 0.6893
+Epoch 2/10, Loss: 0.0996, Val F1: 0.6658,            Precision: 0.6582, Recall: 0.6736
+Epoch 3/10, Loss: 0.0623, Val F1: 0.6941,            Precision: 0.6651, Recall: 0.7258
+Epoch 4/10, Loss: 0.0433, Val F1: 0.6693,            Precision: 0.6675, Recall: 0.6710
+Epoch 5/10, Loss: 0.0311, Val F1: 0.7004,            Precision: 0.7147, Recall: 0.6867
+Epoch 6/10, Loss: 0.0232, Val F1: 0.7132,            Precision: 0.6938, Recall: 0.7337
+Epoch 7/10, Loss: 0.0195, Val F1: 0.6916,            Precision: 0.7077, Recall: 0.6762
+Epoch 8/10, Loss: 0.0168, Val F1: 0.6835,            Precision: 0.6610, Recall: 0.7076
+Epoch 9/10, Loss: 0.0150, Val F1: 0.6819,            Precision: 0.6650, Recall: 0.6997
+Epoch 10/10, Loss: 0.0128, Val F1: 0.6658,            Precision: 0.6607, Recall: 0.6710
+模型：bert-base-chinese 数据集: Weibo_NER
+[2025-11-18 16:51:44] 
+Epoch 1/10, Loss: 0.4683, Val F1: 0.0000,            Precision: 0.0000, Recall: 0.0000
+Epoch 2/10, Loss: 0.1807, Val F1: 0.6485,            Precision: 0.6781, Recall: 0.6214
+Epoch 3/10, Loss: 0.0986, Val F1: 0.6582,            Precision: 0.6434, Recall: 0.6736
+Epoch 4/10, Loss: 0.0673, Val F1: 0.6813,            Precision: 0.7188, Recall: 0.6475
+Epoch 5/10, Loss: 0.0466, Val F1: 0.6914,            Precision: 0.6580, Recall: 0.7285
+Epoch 6/10, Loss: 0.0381, Val F1: 0.6933,            Precision: 0.6635, Recall: 0.7258
+Epoch 7/10, Loss: 0.0296, Val F1: 0.6983,            Precision: 0.6869, Recall: 0.7102
+Epoch 8/10, Loss: 0.0247, Val F1: 0.7059,            Precision: 0.6779, Recall: 0.7363
+Epoch 9/10, Loss: 0.0214, Val F1: 0.7137,            Precision: 0.6902, Recall: 0.7389
+Epoch 10/10, Loss: 0.0183, Val F1: 0.7059,            Precision: 0.7068, Recall: 0.7050
+模型：bert-base-chinese 数据集: Weibo_NER
+[2025-11-18 16:52:44]
+Val F1: 0.6683, Precision: 0.6862, Recall: 0.6513
+
+模型：chinese-bert-wwm 数据集: Weibo_NER
+[2025-11-18 17:04:55] 
+Epoch 1/10, Loss: 0.4915, Val F1: 0.0000,            Precision: 0.0000, Recall: 0.0000
+Epoch 2/10, Loss: 0.1955, Val F1: 0.6095,            Precision: 0.7538, Recall: 0.5116
+Epoch 3/10, Loss: 0.1053, Val F1: 0.6609,            Precision: 0.6394, Recall: 0.6838
+Epoch 4/10, Loss: 0.0694, Val F1: 0.6400,            Precision: 0.6905, Recall: 0.5964
+Epoch 5/10, Loss: 0.0509, Val F1: 0.6675,            Precision: 0.6745, Recall: 0.6607
+Epoch 6/10, Loss: 0.0403, Val F1: 0.6486,            Precision: 0.6495, Recall: 0.6478
+Epoch 7/10, Loss: 0.0328, Val F1: 0.6800,            Precision: 0.7064, Recall: 0.6555
+Epoch 8/10, Loss: 0.0266, Val F1: 0.6920,            Precision: 0.6825, Recall: 0.7018
+Epoch 9/10, Loss: 0.0233, Val F1: 0.7062,            Precision: 0.6931, Recall: 0.7198
+Epoch 10/10, Loss: 0.0237, Val F1: 0.6819,            Precision: 0.6751, Recall: 0.6889
+模型：chinese-bert-wwm 数据集: Weibo_NER
+[2025-11-18 17:13:39] 
+Epoch 1/10, Loss: 0.4287, Val F1: 0.1174,            Precision: 0.4815, Recall: 0.0668
+Epoch 2/10, Loss: 0.1709, Val F1: 0.5636,            Precision: 0.7543, Recall: 0.4499
+Epoch 3/10, Loss: 0.0958, Val F1: 0.6728,            Precision: 0.6825, Recall: 0.6632
+Epoch 4/10, Loss: 0.0637, Val F1: 0.6557,            Precision: 0.6459, Recall: 0.6658
+Epoch 5/10, Loss: 0.0480, Val F1: 0.6931,            Precision: 0.6896, Recall: 0.6967
+Epoch 6/10, Loss: 0.0378, Val F1: 0.6958,            Precision: 0.7166, Recall: 0.6761
+Epoch 7/10, Loss: 0.0282, Val F1: 0.6876,            Precision: 0.6716, Recall: 0.7044
+Epoch 8/10, Loss: 0.0244, Val F1: 0.6903,            Precision: 0.6589, Recall: 0.7249
+Epoch 9/10, Loss: 0.0201, Val F1: 0.6904,            Precision: 0.6612, Recall: 0.7224
+Epoch 10/10, Loss: 0.0170, Val F1: 0.6766,            Precision: 0.6531, Recall: 0.7018
+模型：chinese-bert-wwm 数据集: Weibo_NER
+[2025-11-18 17:18:57] 
+Epoch 1/10, Loss: 0.4870, Val F1: 0.0000,            Precision: 0.0000, Recall: 0.0000
+Epoch 2/10, Loss: 0.2049, Val F1: 0.5952,            Precision: 0.7067, Recall: 0.5141
+Epoch 3/10, Loss: 0.1052, Val F1: 0.6515,            Precision: 0.6425, Recall: 0.6607
+Epoch 4/10, Loss: 0.0701, Val F1: 0.6600,            Precision: 0.6446, Recall: 0.6761
+Epoch 5/10, Loss: 0.0510, Val F1: 0.6778,            Precision: 0.6796, Recall: 0.6761
+Epoch 6/10, Loss: 0.0408, Val F1: 0.6502,            Precision: 0.6262, Recall: 0.6761
+Epoch 7/10, Loss: 0.0356, Val F1: 0.6532,            Precision: 0.6845, Recall: 0.6247
+Epoch 8/10, Loss: 0.0292, Val F1: 0.6871,            Precision: 0.7127, Recall: 0.6632
+Epoch 9/10, Loss: 0.0227, Val F1: 0.6915,            Precision: 0.6486, Recall: 0.7404
+Epoch 10/10, Loss: 0.0183, Val F1: 0.6651,            Precision: 0.6181, Recall: 0.7198
+模型：chinese-bert-wwm 数据集: Weibo_NER
+[2025-11-18 17:22:04]
+Val F1: 0.6453, Precision: 0.6117, Recall: 0.6828
+
+模型：chinese-bert-wwm 数据集: msra_NER
+[2025-11-18 17:28:32] 
+Epoch 1/10, Loss: 0.0463, Val F1: 0.9403,            Precision: 0.9329, Recall: 0.9479
+Epoch 2/10, Loss: 0.0166, Val F1: 0.9482,            Precision: 0.9375, Recall: 0.9592
+Epoch 3/10, Loss: 0.0109, Val F1: 0.9489,            Precision: 0.9427, Recall: 0.9551
+Epoch 4/10, Loss: 0.0079, Val F1: 0.9529,            Precision: 0.9516, Recall: 0.9542
+Epoch 5/10, Loss: 0.0061, Val F1: 0.9538,            Precision: 0.9526, Recall: 0.9549
+Epoch 6/10, Loss: 0.0050, Val F1: 0.9487,            Precision: 0.9431, Recall: 0.9544
+Epoch 7/10, Loss: 0.0045, Val F1: 0.9547,            Precision: 0.9554, Recall: 0.9541
+Epoch 8/10, Loss: 0.0045, Val F1: 0.9565,            Precision: 0.9555, Recall: 0.9574
+Epoch 9/10, Loss: 0.0036, Val F1: 0.9563,            Precision: 0.9523, Recall: 0.9603
+Epoch 10/10, Loss: 0.0033, Val F1: 0.9551,            Precision: 0.9543, Recall: 0.9559
+模型：chinese-bert-wwm 数据集: msra_NER
+[2025-11-18 17:56:48]
+Val F1: 0.9365, Precision: 0.9365, Recall: 0.9365
+
+模型：bert-base-chinese 数据集: msra_NER
+[2025-11-18 17:57:31] 
+Epoch 1/5, Loss: 0.0511, Val F1: 0.9413,            Precision: 0.9461, Recall: 0.9365
+Epoch 2/5, Loss: 0.0166, Val F1: 0.9507,            Precision: 0.9528, Recall: 0.9487
+Epoch 3/5, Loss: 0.0104, Val F1: 0.9541,            Precision: 0.9528, Recall: 0.9554
+Epoch 4/5, Loss: 0.0077, Val F1: 0.9521,            Precision: 0.9481, Recall: 0.9561
+Epoch 5/5, Loss: 0.0060, Val F1: 0.9430,            Precision: 0.9431, Recall: 0.9429
+
+模型：bert-base-chinese 数据集: Weibo_NER
+[2025-11-18 18:07:16] 
+Epoch 1/10, Loss: 0.4521, Val F1: 0.0852,            Precision: 0.3016, Recall: 0.0496
+Epoch 2/10, Loss: 0.1707, Val F1: 0.6351,            Precision: 0.6806, Recall: 0.5953
+Epoch 3/10, Loss: 0.0959, Val F1: 0.6178,            Precision: 0.6304, Recall: 0.6057
+Epoch 4/10, Loss: 0.0648, Val F1: 0.6478,            Precision: 0.6380, Recall: 0.6580
+Epoch 5/10, Loss: 0.0475, Val F1: 0.7122,            Precision: 0.7308, Recall: 0.6945
+Epoch 6/10, Loss: 0.0376, Val F1: 0.6846,            Precision: 0.6437, Recall: 0.7311
+Epoch 7/10, Loss: 0.0325, Val F1: 0.7098,            Precision: 0.7044, Recall: 0.7154
+Epoch 8/10, Loss: 0.0253, Val F1: 0.6685,            Precision: 0.7000, Recall: 0.6397
+Epoch 9/10, Loss: 0.0213, Val F1: 0.6948,            Precision: 0.6619, Recall: 0.7311
+Epoch 10/10, Loss: 0.0174, Val F1: 0.6840,            Precision: 0.6509, Recall: 0.7206
+模型：bert-base-chinese 数据集: Weibo_NER
+[2025-11-18 18:09:29]
+Val F1: 0.6455, Precision: 0.6284, Recall: 0.6634
+
+

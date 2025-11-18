@@ -1,4 +1,6 @@
-
+import torch
+from data_process import MyDataset
+from transformers import AutoTokenizer
 #获取实体
 def extract_entities(labels)->list: #return [(seq_idx,entity_type,start_idx,end_idx),...]
     """
@@ -40,7 +42,57 @@ def extract_entities(labels)->list: #return [(seq_idx,entity_type,start_idx,end_
             if labels[i][j][0]=='I':
                 j+=1
                 continue
-    return all_entities                                                
+    return all_entities       
+
+
+def predict_sentence(model, text, config):
+    """
+    输入text(str),
+    返回[(entity_text, entity_type)] 列表
+    """
+    model.eval()
+    tokenizer = AutoTokenizer.from_pretrained(config.model_path)
+    device = config.device
+
+    encoded = tokenizer(
+        text,
+        return_tensors="pt",
+        padding=False
+    )
+    input_ids = encoded["input_ids"].to(device)
+
+    with torch.no_grad():
+        logits = model(input_ids)  # (1, seq_len, num_classes)
+
+    pred_ids = torch.argmax(logits, dim=-1).squeeze(0).tolist()
+    pred_labels = [MyDataset.idx_2_labels[id] for id in pred_ids]
+
+     # 因为 extract_entities 接收二维 [[...]] 的格式
+    label_seqs = [pred_labels]
+    entities = extract_entities(label_seqs)
+    # entities 的格式为：
+    # [(seq_idx, entity_type, start_idx, end_idx), ...]
+    tokens = tokenizer.convert_ids_to_tokens(input_ids.squeeze(0))
+
+    #去掉 CLS 和 SEP
+    special_tokens = {tokenizer.cls_token, tokenizer.sep_token, tokenizer.pad_token}
+    # 用于在拼接实体时过滤掉特殊 token
+    tokens_filtered = [tok for tok in tokens if tok not in special_tokens]
+    final_entities = []
+    for (_, ent_type, start, end) in entities:
+        # 处理 WordPiece 拼接
+        token_span = tokens[start:end+1]
+        token_span = [tok for tok in token_span if tok not in special_tokens]
+        word = ""
+        for tok in token_span:
+            if tok.startswith("##"):
+                word += tok[2:]
+            else:
+                word += tok
+        if word:
+            final_entities.append((word, ent_type))
+    return final_entities
+
 
 def my_Precision(y_true, y_pred):
     #预测为正的样本中，有多少是真正的正样本

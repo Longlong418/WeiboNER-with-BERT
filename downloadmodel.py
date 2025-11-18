@@ -1,8 +1,8 @@
 from huggingface_hub import snapshot_download
-from Config import Config
+from My_Config import My_ConfigConfig
 from tqdm import tqdm
 
-config=Config()
+config=My_ConfigConfig()
 
 for repo in tqdm(config.models.keys()):
     model_dir = snapshot_download(repo_id=repo, cache_dir=config.cache_dir)

@@ -7,10 +7,54 @@
 - **数据加载与预处理**（BIO 标注格式）  
 - **模型设计与训练流程**  
 - **模型评估与结果可视化**（可视化使用 `swanlab`）  
-- **(新增功能)** 同时支持 `chinese-bert-wwm` 和 `bert-base-chinese` 两个预训练权重，同时支持 `Weibo_NER` 和 `MSRA_NER` 两个数据集（可继续扩展），具体方式为使用 `argparse` 传参或者直接修改 `config.json` 文件。
 
 ## ✅ 实验结果
-评价指标包括 **F1**、**Precision**、**Recall**，测试结果包含在 `dev.txt` 和 `test.txt` 上，详见 `result/training_log.txt`。
+评价指标包括 **F1**、**Precision**、**Recall**，
+以下为test.txt上的结果：
+| 数据集 | 模型                | Precision | Recall | F1值    |
+|--------|-------------------|-----------|--------|---------|
+| weibo  | bert-base-chinese  | 0.6284     | 0.6634  |  0.6455   |
+| weibo  | chinese-bert-wwm   | 0.6117     | 0.6828 | 0.6453   |
+| msra   | bert-base-chinese  | 0.9431    | 0.9429 | 0.9430   |
+| msra   | chinese-bert-wwm   | 0.9365     | 0.9365  | 0.9365   |
+
+dev.txt结果详见 `result/training_log.txt`。
+
+## 如何运行代码
+### 1. 安装依赖
+
+```bash
+pip install -r requirements.txt
+
+```
+### 2.训练模型
+--mode：运行模式，训练时设置为 train
+--config_path：配置文件路径，可选，默认路径为 ./NER_Config/Bertbase_Weibo_Config.json
+一个配置文件对应一个实验
+```bash
+python main.py --mode train --config_path ./NER_Config/Bertbase_Weibo_Config.json #这里可以替换为你想要的json配置文件 
+```
+训练完成后，模型权重会保存在配置文件中 trained_save_root_path 指定的目录下，对应文件路径会保存在json文件中
+
+### 3.在测试集上评估
+```bash
+
+python main.py --mode eval --config_path ./NER_Config/Bertbase_Weibo_Config.json 
+
+```
+脚本会输出 F1、Precision、Recall，并将结果记录到 training_log.txt
+
+### 4.对单条句子进行实体预测
+
+```bash
+python main.py --mode predict --config_path ./NER_Config/Bertbase_Weibo_Config.json
+```
+运行后会提示输入一句中文文本
+程序会输出该句子中的实体及对应类型，例如：
+```bash
+[('小明', 'PER.NAM'), ('北京', 'GPE.NAM'), ('大学', 'ORG.NOM')]
+```
+![](https://img.xlonglong.cn/img/202511181811635.png)
 
 ## 📊 数据集来源
 
@@ -52,19 +96,23 @@ Weibo-NER/
 │   ├── dev.txt
 │   ├── class.txt
 ├── result/ #实验结果
-│ ├── bert-base-chineseformsra_NER.pth
+│ ├── bert-base-chinese_for_Weibo_NER.pth
 │ ├── bert-base-chineseforWeibo_NER.pth
 │ ├── chinese-bert-wwmformsra_NER.pth
-│ ├── chinese-bert-wwmforWeibo_NER.pth
+│ ├── chinese-bert-wwm_for_Weibo_NER.pth
 │ ├── training_log.txt
+├── NER_config/
+│ ├── Bertbase_msra_Config.json
+│ ├── Bertbase_Weibo_Config.json
+│ ├── Chinese_bert_wwm_msra_config.json.json
+│ ├── Chinese_bert_wwm_Weibo_config.json.json
 │ 
 │── data_process.py
+│── main.py
 │── model.py
-│── train.py
-│── predict.py
+│── train_evaluate.py
 ├── requirements.txt
-│── config.json
-│── Config.py
+│── My_Config.py
 ├── data_split_tools.py
 │── downloadmodel.py
 │── tools.py
