@@ -12,14 +12,13 @@ class MyDataset(Dataset):
     labels_2_idx = None     # dict label -> idx
     tokenizer=None
         
-    def __init__(self,data,model_path,file_path=None):#file_path需要传入训练集的path
+    def __init__(self,config,data):#file_path需要传入训练集的path
         self.data=data
-        self.tokenizer=AutoTokenizer.from_pretrained(model_path)
+        self.tokenizer=AutoTokenizer.from_pretrained(config.model_path)
         if MyDataset.train_examples is None:
-            MyDataset.train_examples, MyDataset.set_label = self.data_read(file_path)
+            MyDataset.train_examples, MyDataset.set_label = self.data_read(config.train_path)
         self.idx_2_labels=sorted(MyDataset.set_label)
         self.labels_2_idx={j:i for i,j in enumerate(self.idx_2_labels)}
-        self.model_path=model_path
         #放到静态变量中
         MyDataset.idx_2_labels = self.idx_2_labels
         MyDataset.labels_2_idx = self.labels_2_idx
@@ -78,7 +77,7 @@ class MyDataset(Dataset):
             new_labels = []
             for start,end in offset_mapping:
                 if start == end == 0:
-                    new_labels.append(-100)#这里将[CLS]和[SEP]的标签设为-1，表示忽略
+                    new_labels.append(-100)#这里将[CLS]和[SEP]的标签设为-100，表示忽略
                     continue
                 
                 token_labels = []

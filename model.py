@@ -7,9 +7,9 @@ from data_process import  MyDataset
 from transformers import BertModel, AutoTokenizer
 
 class BertCnnNER(nn.Module):
-    def __init__(self,num_classes,config,model_name):
+    def __init__(self,num_classes,config):
         super(BertCnnNER, self).__init__()
-        self.bert = BertModel.from_pretrained(config.models[model_name])
+        self.bert = BertModel.from_pretrained(config.model_path)
         hidden_size = self.bert.config.hidden_size  # BERT的隐藏层大小，通常为768
         # 因为1D卷积的输出长度计算公式为：(L_in + 2*padding - dilation*(kernel_size-1) -1)/stride +1# 这里stride=1,dilation=1
         # =>(L_in + 2*padding - (kernel_size-1) -1) +1 = L_in + 2*padding - kernel_size +1
@@ -34,13 +34,15 @@ class BertCnnNER(nn.Module):
         x=x.permute(0,2,1) #(batch_size,L_out,out_channels*3) 这里L_out=L_in=seq_length=输入序列长度
         x = self.dropout(x)                 
         logits = self.fc(x)   #得到(batch_size,sel_length,num_classes)
+        pad_mask = (input_ids == 0).unsqueeze(-1)  # (batch, seq_len, 1)
+        logits = logits.masked_fill(pad_mask, -1e9)  # PAD 位置全部置极小
 
         return logits
     
 class BertNER(nn.Module):
-    def __init__(self,num_classes,config,model_name):
+    def __init__(self,num_classes,config):
         super(BertNER, self).__init__()
-        self.bert = BertModel.from_pretrained(config.models[model_name])
+        self.bert = BertModel.from_pretrained(config.model_path)
         hidden_size = self.bert.config.hidden_size  # BERT的隐藏层大小，通常为768
         self.dropout = nn.Dropout(config.dropout)
         self.fc = nn.Linear(hidden_size, num_classes)#  3个卷积层的输出通道数之和

@@ -1,0 +1,17 @@
+{
+    "config_path": "NER_Config/Chinese_bert_wwm_Weibo_config.json",
+    "data_name": "Weibo_NER",
+    "train_path": "./data/Weibo_NER/train.txt",
+    "dev_path": "./data/Weibo_NER/dev.txt",
+    "test_path": "./data/Weibo_NER/test.txt",
+    "model_name": "chinese-bert-wwm",
+    "model_path": "./model/models--hfl--chinese-bert-wwm/snapshots/ab0aa81da273504efc8540aa4d0bbaa3016a1bb5",
+    "device": "cuda",
+    "batch_size": 8,
+    "dropout": 0.1,
+    "epochs": 10,
+    "learning_rate": 2e-05,
+    "trained_save_root_path": "./result",
+    "cache_dir": "./model",
+    "trained_model_path": "./result/chinese-bert-wwm_for_Weibo_NER.pth"
+}
