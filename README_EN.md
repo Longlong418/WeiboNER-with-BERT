@@ -129,7 +129,7 @@ Weibo-NER/
 ├── requirements.txt
 │── My_Config.py
 ├── data_split_tools.py
-│── downloadmodel.py
+│── download_model.py
 │── tools.py
 └── README.md
 └── README_EN.md
